@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "ubytovaci_cast", schema = "public", catalog = "tranomin")
 
-public class UbytovaciCastEntity {
+public class UbytovaciCastEntity extends HotelEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -36,7 +36,7 @@ public class UbytovaciCastEntity {
         this.idUbytovaciCast = idUbytovaciCast;
     }
 
-    public Integer getIdHotel() {
+    public int getIdHotel() {
         return idHotel;
     }
 

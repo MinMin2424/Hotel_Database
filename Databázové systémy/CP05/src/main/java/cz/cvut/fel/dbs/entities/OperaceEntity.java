@@ -18,8 +18,17 @@ public class OperaceEntity {
     @Column(name = "typ", nullable = true, length = 64)
     private String typ;
 
-    @OneToMany(mappedBy = "idOperace")
-    private Collection<PozadatZariditEntity> listOperaci;
+    @ManyToMany
+    @JoinTable(name = "pozadat_zaridit",
+            joinColumns = @JoinColumn(name = "id_operace"),
+            inverseJoinColumns = @JoinColumn(name = "id_hotel"))
+    private Collection<HotelEntity> listHotel;
+
+    @ManyToMany
+    @JoinTable(name = "pozadat_zaridit",
+            joinColumns = @JoinColumn(name = "id_operace"),
+            inverseJoinColumns = @JoinColumn(name = "id_hotelovy_retezec"))
+    private Collection<HotelovyRetezecEntity> listHotelovyRetezec;
 
     public int getIdOperace() {
         return idOperace;
@@ -37,12 +46,20 @@ public class OperaceEntity {
         this.typ = typ;
     }
 
-    public Collection<PozadatZariditEntity> getListOperaci() {
-        return listOperaci;
+    public Collection<HotelEntity> getListHotel() {
+        return listHotel;
     }
 
-    public void setListOperaci(Collection<PozadatZariditEntity> listOperaci) {
-        this.listOperaci = listOperaci;
+    public void setListHotel(Collection<HotelEntity> listHotel) {
+        this.listHotel = listHotel;
+    }
+
+    public Collection<HotelovyRetezecEntity> getListHotelovyRetezec() {
+        return listHotelovyRetezec;
+    }
+
+    public void setListHotelovyRetezec(Collection<HotelovyRetezecEntity> listHotelovyRetezec) {
+        this.listHotelovyRetezec = listHotelovyRetezec;
     }
 
     @Override

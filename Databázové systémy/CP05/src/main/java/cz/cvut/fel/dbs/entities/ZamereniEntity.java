@@ -37,11 +37,12 @@ public class ZamereniEntity {
         this.idHotel = idHotel;
     }
 
-    public int getIdHotelovyRetezec() {
+
+    public Collection<HotelovyRetezecEntity> getIdHotelovyRetezec() {
         return idHotelovyRetezec;
     }
 
-    public void setIdHotelovyRetezec(int idHotelovyRetezec) {
+    public void setIdHotelovyRetezec(Collection<HotelovyRetezecEntity> idHotelovyRetezec) {
         this.idHotelovyRetezec = idHotelovyRetezec;
     }
 
