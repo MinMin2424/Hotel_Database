@@ -2,6 +2,8 @@ package cz.cvut.fel.dbs.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "email", schema = "public", catalog = "tranomin")
 
@@ -48,21 +50,12 @@ public class EmailEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         EmailEntity that = (EmailEntity) o;
-
-        if (idEmail != that.idEmail) return false;
-        if (adresaEmail != null ? !adresaEmail.equals(that.adresaEmail) : that.adresaEmail != null) return false;
-        if (idHotel != null ? !idHotel.equals(that.idHotel) : that.idHotel != null) return false;
-
-        return true;
+        return idEmail == that.idEmail && Objects.equals(adresaEmail, that.adresaEmail) && Objects.equals(idHotel, that.idHotel);
     }
 
     @Override
     public int hashCode() {
-        int result = idEmail;
-        result = 31 * result + (adresaEmail != null ? adresaEmail.hashCode() : 0);
-        result = 31 * result + (idHotel != null ? idHotel.hashCode() : 0);
-        return result;
+        return Objects.hash(idEmail, adresaEmail, idHotel);
     }
 }

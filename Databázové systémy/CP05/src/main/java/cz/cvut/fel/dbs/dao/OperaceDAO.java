@@ -9,7 +9,7 @@ public class OperaceDAO extends BaseDAO<OperaceEntity> {
         super(type);
     }
 
-    protected OperaceDAO(Class<OperaceEntity> type, EntityManager entityManager) {
+    public OperaceDAO(Class<OperaceEntity> type, EntityManager entityManager) {
         super(type, entityManager);
     }
 

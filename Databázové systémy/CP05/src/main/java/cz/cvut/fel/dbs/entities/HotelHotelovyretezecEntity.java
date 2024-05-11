@@ -5,7 +5,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-@Entity
+import java.util.Objects;
+
+//@Entity
 @Table(name = "hotel_hotelovyretezec", schema = "public", catalog = "tranomin")
 
 public class HotelHotelovyretezecEntity {
@@ -47,22 +49,12 @@ public class HotelHotelovyretezecEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         HotelHotelovyretezecEntity that = (HotelHotelovyretezecEntity) o;
-
-        if (idHotel != null ? !idHotel.equals(that.idHotel) : that.idHotel != null) return false;
-        if (nazev != null ? !nazev.equals(that.nazev) : that.nazev != null) return false;
-        if (hotelovyRetezec != null ? !hotelovyRetezec.equals(that.hotelovyRetezec) : that.hotelovyRetezec != null)
-            return false;
-
-        return true;
+        return Objects.equals(idHotel, that.idHotel) && Objects.equals(nazev, that.nazev) && Objects.equals(hotelovyRetezec, that.hotelovyRetezec);
     }
 
     @Override
     public int hashCode() {
-        int result = idHotel != null ? idHotel.hashCode() : 0;
-        result = 31 * result + (nazev != null ? nazev.hashCode() : 0);
-        result = 31 * result + (hotelovyRetezec != null ? hotelovyRetezec.hashCode() : 0);
-        return result;
+        return Objects.hash(idHotel, nazev, hotelovyRetezec);
     }
 }

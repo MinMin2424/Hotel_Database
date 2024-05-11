@@ -2,19 +2,21 @@ package cz.cvut.fel.dbs.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "stravovaci_cast", schema = "public", catalog = "tranomin")
 
-public class StravovaciCastEntity extends HotelEntity {
+public class StravovaciCastEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_stravovaci_cast", nullable = false)
     private int idStravovaciCast;
 
-    @Basic
-    @Column(name = "id_hotel", nullable = true)
-    private Integer idHotel;
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "id_hotel", referencedColumnName = "id_hotel")
+    private HotelEntity idHotel;
 
     @Basic
     @Column(name = "nazev", nullable = false, length = 64)
@@ -42,14 +44,6 @@ public class StravovaciCastEntity extends HotelEntity {
 
     public void setIdStravovaciCast(int idStravovaciCast) {
         this.idStravovaciCast = idStravovaciCast;
-    }
-
-    public int getIdHotel() {
-        return idHotel;
-    }
-
-    public void setIdHotel(Integer idHotel) {
-        this.idHotel = idHotel;
     }
 
     public String getNazev() {
@@ -96,31 +90,13 @@ public class StravovaciCastEntity extends HotelEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
+        if (!super.equals(o)) return false;
         StravovaciCastEntity that = (StravovaciCastEntity) o;
-
-        if (idStravovaciCast != that.idStravovaciCast) return false;
-        if (idHotel != null ? !idHotel.equals(that.idHotel) : that.idHotel != null) return false;
-        if (nazev != null ? !nazev.equals(that.nazev) : that.nazev != null) return false;
-        if (typServisu != null ? !typServisu.equals(that.typServisu) : that.typServisu != null) return false;
-        if (typRestauraci != null ? !typRestauraci.equals(that.typRestauraci) : that.typRestauraci != null)
-            return false;
-        if (kapacita != null ? !kapacita.equals(that.kapacita) : that.kapacita != null) return false;
-        if (oteviraciDoba != null ? !oteviraciDoba.equals(that.oteviraciDoba) : that.oteviraciDoba != null)
-            return false;
-
-        return true;
+        return idStravovaciCast == that.idStravovaciCast && Objects.equals(idHotel, that.idHotel) && Objects.equals(nazev, that.nazev) && Objects.equals(typServisu, that.typServisu) && Objects.equals(typRestauraci, that.typRestauraci) && Objects.equals(kapacita, that.kapacita) && Objects.equals(oteviraciDoba, that.oteviraciDoba);
     }
 
     @Override
     public int hashCode() {
-        int result = idStravovaciCast;
-        result = 31 * result + (idHotel != null ? idHotel.hashCode() : 0);
-        result = 31 * result + (nazev != null ? nazev.hashCode() : 0);
-        result = 31 * result + (typServisu != null ? typServisu.hashCode() : 0);
-        result = 31 * result + (typRestauraci != null ? typRestauraci.hashCode() : 0);
-        result = 31 * result + (kapacita != null ? kapacita.hashCode() : 0);
-        result = 31 * result + (oteviraciDoba != null ? oteviraciDoba.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), idStravovaciCast, idHotel, nazev, typServisu, typRestauraci, kapacita, oteviraciDoba);
     }
 }

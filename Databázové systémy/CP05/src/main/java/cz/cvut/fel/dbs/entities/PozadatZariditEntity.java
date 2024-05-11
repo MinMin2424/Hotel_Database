@@ -1,14 +1,18 @@
 package cz.cvut.fel.dbs.entities;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "pozadat_zaridit", schema = "public", catalog = "tranomin")
 
 public class PozadatZariditEntity {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id_vyresena_operace", nullable = false)
+    private int idVyresenaOperace;
 
     @Basic
     @Column(name = "id_operace", nullable = false)
@@ -21,6 +25,14 @@ public class PozadatZariditEntity {
     @Basic
     @Column(name = "id_hotelovy_retezec", nullable = false)
     private int idHotelovyRetezec;
+
+    public int getIdVyresenaOperace() {
+        return idVyresenaOperace;
+    }
+
+    public void setIdVyresenaOperace(int idVyresenaOperace) {
+        this.idVyresenaOperace = idVyresenaOperace;
+    }
 
     public int getIdOperace() {
         return idOperace;
@@ -50,21 +62,12 @@ public class PozadatZariditEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         PozadatZariditEntity that = (PozadatZariditEntity) o;
-
-        if (idOperace != that.idOperace) return false;
-        if (idHotel != that.idHotel) return false;
-        if (idHotelovyRetezec != that.idHotelovyRetezec) return false;
-
-        return true;
+        return idVyresenaOperace == that.idVyresenaOperace && idOperace == that.idOperace && idHotel == that.idHotel && idHotelovyRetezec == that.idHotelovyRetezec;
     }
 
     @Override
     public int hashCode() {
-        int result = idOperace;
-        result = 31 * result + idHotel;
-        result = 31 * result + idHotelovyRetezec;
-        return result;
+        return Objects.hash(idVyresenaOperace, idOperace, idHotel, idHotelovyRetezec);
     }
 }

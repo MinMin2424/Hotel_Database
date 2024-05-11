@@ -5,12 +5,6 @@
              version="3.0">
   <persistence-unit name="ApplicationPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>cz.cvut.fel.dbs.oldEntites.Hotel</class>
-      <class>cz.cvut.fel.dbs.oldEntites.PozadatZaridit</class>
-      <class>cz.cvut.fel.dbs.oldEntites.Zamereni</class>
-      <class>cz.cvut.fel.dbs.id.Hotel_Identifikators</class>
-    <class>cz.cvut.fel.dbs.oldEntites.UbytovaciCast</class>
-    <class>cz.cvut.fel.dbs.oldEntites.StravovaciCast</class>
     <class>cz.cvut.fel.dbs.entities.EmailEntity</class>
     <class>cz.cvut.fel.dbs.entities.HotelEntity</class>
     <class>cz.cvut.fel.dbs.entities.HotelovyRetezecEntity</class>
@@ -36,10 +30,10 @@
       <property
               name="jakarta.persistence.schema-generation.database.action"
               value="create"/>
-      <property name="eclipselink.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/tranomin"/>
-      <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="eclipselink.jdbc.user" value="tranomin"/>
-      <property name="eclipselink.jdbc.password" value="tranomin_DBS24"/>
+<!--      <property name="eclipselink.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/tranomin"/>-->
+<!--      <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>-->
+<!--      <property name="eclipselink.jdbc.user" value="tranomin"/>-->
+<!--      <property name="eclipselink.jdbc.password" value="tranomin_DBS24"/>-->
     </properties>
   </persistence-unit>
 </persistence>

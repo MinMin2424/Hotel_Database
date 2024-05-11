@@ -3,14 +3,14 @@ package cz.cvut.fel.dbs.entities;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "hotel", schema = "public", catalog = "tranomin")
-@Inheritance(strategy = InheritanceType.JOINED)
 
-public abstract class HotelEntity {
+public class HotelEntity {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_hotel", nullable = false)
     private int idHotel;
@@ -25,7 +25,7 @@ public abstract class HotelEntity {
 
     @Basic
     @Column(name = "rok_zalozeni", nullable = false)
-    private short rokZalozeni;
+    private int rokZalozeni;
 
     @Basic
     @Column(name = "ulice", nullable = false, length = 64)
@@ -55,7 +55,7 @@ public abstract class HotelEntity {
     private Integer idNadhotel;
 
     @ManyToOne
-    @Column(name = "id_hotelovy_retezec", nullable = true)
+    @JoinColumn(name = "id_hotelovy_retezec", nullable = true)
     private HotelovyRetezecEntity idHotelovyRetezec;
 
     @ManyToMany
@@ -91,11 +91,11 @@ public abstract class HotelEntity {
         this.nazev = nazev;
     }
 
-    public short getRokZalozeni() {
+    public int getRokZalozeni() {
         return rokZalozeni;
     }
 
-    public void setRokZalozeni(short rokZalozeni) {
+    public void setRokZalozeni(int rokZalozeni) {
         this.rokZalozeni = rokZalozeni;
     }
 
@@ -183,39 +183,12 @@ public abstract class HotelEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         HotelEntity that = (HotelEntity) o;
-
-        if (idHotel != that.idHotel) return false;
-        if (rokZalozeni != that.rokZalozeni) return false;
-        if (ico != null ? !ico.equals(that.ico) : that.ico != null) return false;
-        if (nazev != null ? !nazev.equals(that.nazev) : that.nazev != null) return false;
-        if (ulice != null ? !ulice.equals(that.ulice) : that.ulice != null) return false;
-        if (mesto != null ? !mesto.equals(that.mesto) : that.mesto != null) return false;
-        if (cisloPopisne != null ? !cisloPopisne.equals(that.cisloPopisne) : that.cisloPopisne != null) return false;
-        if (telefonniCislo != null ? !telefonniCislo.equals(that.telefonniCislo) : that.telefonniCislo != null)
-            return false;
-        if (url != null ? !url.equals(that.url) : that.url != null) return false;
-        if (idNadhotel != null ? !idNadhotel.equals(that.idNadhotel) : that.idNadhotel != null) return false;
-        if (idHotelovyRetezec != null ? !idHotelovyRetezec.equals(that.idHotelovyRetezec) : that.idHotelovyRetezec != null)
-            return false;
-
-        return true;
+        return idHotel == that.idHotel && rokZalozeni == that.rokZalozeni && Objects.equals(ico, that.ico) && Objects.equals(nazev, that.nazev) && Objects.equals(ulice, that.ulice) && Objects.equals(mesto, that.mesto) && Objects.equals(cisloPopisne, that.cisloPopisne) && Objects.equals(telefonniCislo, that.telefonniCislo) && Objects.equals(emails, that.emails) && Objects.equals(url, that.url) && Objects.equals(idNadhotel, that.idNadhotel) && Objects.equals(idHotelovyRetezec, that.idHotelovyRetezec) && Objects.equals(zamereni_hotel, that.zamereni_hotel) && Objects.equals(listOperaci, that.listOperaci);
     }
 
     @Override
     public int hashCode() {
-        int result = idHotel;
-        result = 31 * result + (ico != null ? ico.hashCode() : 0);
-        result = 31 * result + (nazev != null ? nazev.hashCode() : 0);
-        result = 31 * result + (int) rokZalozeni;
-        result = 31 * result + (ulice != null ? ulice.hashCode() : 0);
-        result = 31 * result + (mesto != null ? mesto.hashCode() : 0);
-        result = 31 * result + (cisloPopisne != null ? cisloPopisne.hashCode() : 0);
-        result = 31 * result + (telefonniCislo != null ? telefonniCislo.hashCode() : 0);
-        result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + (idNadhotel != null ? idNadhotel.hashCode() : 0);
-        result = 31 * result + (idHotelovyRetezec != null ? idHotelovyRetezec.hashCode() : 0);
-        return result;
+        return Objects.hash(idHotel, ico, nazev, rokZalozeni, ulice, mesto, cisloPopisne, telefonniCislo, emails, url, idNadhotel, idHotelovyRetezec, zamereni_hotel, listOperaci);
     }
 }

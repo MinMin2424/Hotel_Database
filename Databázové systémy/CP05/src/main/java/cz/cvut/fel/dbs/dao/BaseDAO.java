@@ -3,6 +3,7 @@ package cz.cvut.fel.dbs.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.sql.Savepoint;
 import java.util.List;
 
 public class BaseDAO<T> {
@@ -40,5 +41,17 @@ public class BaseDAO<T> {
 
     public List<T> findAll() {
         return entityManager.createQuery("SELECT e FROM " + type.getSimpleName() + " e", type).getResultList();
+    }
+
+    public void beginTransaction() {
+        entityManager.getTransaction().begin();
+    }
+
+    public void commitTransaction() {
+        entityManager.getTransaction().commit();
+    }
+
+    public void rollbackTransaction() {
+        entityManager.getTransaction().rollback();
     }
 }
